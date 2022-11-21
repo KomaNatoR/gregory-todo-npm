@@ -20,26 +20,9 @@ const render = () => {
     refs.list.innerHTML = '';
     refs.list.insertAdjacentHTML('beforeend', lis.join(''));
 };
-// ------------------------------ locaStorage ------------
-const createTodo = payLoad => { 
-    console.log(payLoad);
-    localStorage.setItem('todos', JSON.stringify(payLoad));
-};
-const fetchTodos = () => { 
-    try {
-        return JSON.parse(localStorage.getItem('todos')) || [];
-    } catch (error) {
-        console.log('can`t load todos');
-        return [];
-    }
-};
-const updateTodo = (payLoad) => { 
-    localStorage.setItem('todos', JSON.stringify(payLoad));
-};
-const deleteTodo = (payLoad) => { 
-    localStorage.setItem('todos', JSON.stringify(payLoad));
-};
-//--------------------------------------------------------
+// ------------------------------ locaStorage -----------------------------
+import {createTodo, fetchTodos, updateTodo, deleteTodo } from './todosApi';
+//-------------------------------------------------------------------------
 function hendleSubmit(e) {
     // const value = e.target.elements.text.value; -- повний варіант!
     const { value } = e.target.elements.text;
