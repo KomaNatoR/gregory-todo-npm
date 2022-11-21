@@ -5,10 +5,10 @@ import 'basiclightbox/dist/basicLightbox.min.css'
 
 import { getItemTemplate } from './getItemTemplate.js';
 // import { items } from './items.js'; -- було так!
-import { items as importedItems } from './items';
+// import { items as importedItems } from './items';
 
 
-let items = importedItems;
+let items = [];
 const refs = { 
     list: document.querySelector('.list'),
     form: document.querySelector('.form'),
@@ -20,27 +20,45 @@ const render = () => {
     refs.list.innerHTML = '';
     refs.list.insertAdjacentHTML('beforeend', lis.join(''));
 };
-
+// ------------------------------ locaStorage ------------
+const createTodo = payLoad => { 
+    console.log(payLoad);
+    localStorage.setItem('todos', JSON.stringify(payLoad));
+};
+const fetchTodos = () => { 
+    try {
+        return JSON.parse(localStorage.getItem('todos')) || [];
+    } catch (error) {
+        console.log('can`t load todos');
+        return [];
+    }
+};
+const updateTodo = (payLoad) => { 
+    localStorage.setItem('todos', JSON.stringify(payLoad));
+};
+const deleteTodo = (payLoad) => { 
+    localStorage.setItem('todos', JSON.stringify(payLoad));
+};
+//--------------------------------------------------------
 function hendleSubmit(e) {
     // const value = e.target.elements.text.value; -- повний варіант!
     const { value } = e.target.elements.text;
-
-    e.preventDefault();
-    addItem(value);
-    render();
-    refs.form.reset();
-}
-
-function addItem (text) {
-    
     const payLoad = {
-        // text: text, - так було!
-        text,
+        text: value,
         isDone: false,
         id: uuidv4(),
         created: new Date(),
     };
-    items.push(payLoad);
+
+    e.preventDefault();
+    addItem(payLoad);
+    createTodo(items);
+    render();
+    refs.form.reset();
+}
+
+function addItem (item) {
+    items.push(item);
 };
 
 const toggleItem = (id) => { 
@@ -49,6 +67,7 @@ const toggleItem = (id) => {
         ? {...item, isDone: !item.isDone,} 
         : item
     );
+    updateTodo(items);
     console.log();
     // items = items.map(item =>
     //     item.isDone === true
@@ -75,6 +94,7 @@ const viewItem = (id) => {
     // if (modal.visible()) modal.close(); --- можна так!
     // ------------------------------------
     // if (code !== 'Escape' && modal.visible()) {modal.close()}; --- або так!
+    // ------------------------------------
     function onEscCloseModal({ code }) {
         if (code === 'Escape') {
             modal.close();
@@ -86,6 +106,7 @@ const viewItem = (id) => {
 };
 const deleteItem = (id) => { 
     items = items.filter(item => item.id !== id);
+    deleteTodo(items);
     render();
     console.log(items, id);
 };
@@ -119,7 +140,11 @@ function hendleListClick(e) {
 //         parent.style.backgroundColor = "white";
 //     }
 // }
+const loadData = () => { 
+    items = fetchTodos();
+};
 
+loadData();
 render();
 refs.form.addEventListener('submit', hendleSubmit);
 refs.list.addEventListener('click', hendleListClick);
