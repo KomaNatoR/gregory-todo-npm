@@ -1,18 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homework 8</title>
-    <link rel="stylesheet" href="css/common.css" />
-  </head>
-  <body>
-    <ul>
-      <li><a href="01-gallery.html">Image gallery</a></li>
-      <li><a href="02-video.html">Video playback</a></li>
-      <li><a href="03-feedback.html">Feedback form</a></li>
-      <li><a href="gregory-todo.html">Gregory TodO</a></li>
-    </ul>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ToDoS</title>
+  <style>
+    .form {
+      border-radius: 3px;
+      background-color: orange;
+      padding: 10px;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      list-style: none;
+      padding: 10px;
+      margin: 0;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid grey;
+      padding: 10px;
+      background-color: white;
+    }
+
+    .btn {
+      border-radius: 3px;
+      border-color: transparent;
+      /* color: white;     */
+    }
+
+    .add {
+      background-color: rgb(17, 194, 17);
+      color: white;
+    }
+
+    .delete {
+      box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+      background-color: rgb(222, 0, 0);
+      color: white;
+    }
+
+    .view {
+      color: black;
+    }
+
+    .modal {
+      background-color: #fff;
+      padding: 50px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body style="background-color: rgb(180, 180, 180)">
+  <div id="timer-1"></div>
+
+  <!-- Add gallery items to this list -->
+  <form class="form">
+    <label>
+      <span>Text</span>
+      <input type="text" name="text" placeholder="write your wish here!" />
+    </label>
+    <button class="btn add" type="submit">add task</button>
+  </form>
+
+  <ul class="list"></ul>
+
+  <script src="js/index.js" type="module"></script>
+</body>
+
 </html>
