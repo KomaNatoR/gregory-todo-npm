@@ -1,5 +1,6 @@
 import * as basicLightbox from 'basiclightbox';
 import { v4 as uuidv4 } from 'uuid';
+import moment from 'moment';
 
 import 'basiclightbox/dist/basicLightbox.min.css'
 

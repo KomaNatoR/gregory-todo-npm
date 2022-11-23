@@ -1,2 +1,2 @@
 import './todos.js';
-import './timer';
+import './timers';
