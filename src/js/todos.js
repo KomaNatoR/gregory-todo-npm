@@ -31,7 +31,7 @@ function hendleSubmit(e) {
         text: value,
         isDone: false,
         id: uuidv4(),
-        created: new Date(),
+        created: moment(new Date()).format('YYYY-MM-DD HH:mm'),
     };
 
     e.preventDefault();
