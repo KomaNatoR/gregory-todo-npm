@@ -124,12 +124,23 @@ function hendleListClick(e) {
 //         parent.style.backgroundColor = "white";
 //     }
 // }
-const loadData = () => { 
-    items = fetchTodos();
-};
+//-------------- так було замість того шо нижче -------
+// const loadData = () => { 
+//     items = fetchTodos();
+// };
 
-loadData();
-render();
+// loadData();
+// render();
+
+// -----------------------------------------------
+
+
+fetchTodos()
+    .then(data => {
+        items = data;
+        render(); 
+    });
+
 refs.form.addEventListener('submit', hendleSubmit);
 refs.list.addEventListener('click', hendleListClick);
 

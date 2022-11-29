@@ -4,10 +4,10 @@ export const createTodo = payLoad => {
 };
 export const fetchTodos = () => { 
     try {
-        return JSON.parse(localStorage.getItem('todos')) || [];
+        return Promise.resolve(JSON.parse(localStorage.getItem('todos')) || []);
     } catch (error) {
         console.log('can`t load todos');
-        return [];
+        return Promise.resolve([]);
     }
 };
 export const updateTodo = (payLoad) => { 
